@@ -1,6 +1,7 @@
 # Document : https://pyserial.readthedocs.io/en/latest/index.html
 
 import serial
+import time
 
 ###################################################################################################
 # Open Serial
@@ -50,6 +51,7 @@ def read(ser, size=1, timeout=None):
 # Putty에서의 EOF : Ctrl + J
 def readEOF(ser):
     readed = ser.readline()
+    # return readed
     return readed[:-1]
 
 # Ctrl + C 가 들어올때까지 Read
@@ -59,7 +61,7 @@ def readuntilExitCode(ser, code=b'\x03'):
         data = ser.read()
         # print(data)
         readed += data
-        print(readed)
+        # print(readed)
         if data == code:
             return readed[:-1]
 
@@ -67,7 +69,10 @@ if __name__ == '__main__':
     # 시리얼 포트 객체생성
     ser = openSerial('COM2', 9600)
 
+    # time.sleep(10)
+
     # 포트 쓰기
+    # writePort(ser, "HelloWorld") # Unicode --> Error!!
     # writePort(ser, 'HelloWorld'.encode())
     # writePortUnicode(ser, 'HelloWorld')
     # writePortUnicode(ser, '안녕세상아~')
@@ -84,7 +89,28 @@ if __name__ == '__main__':
     # print(read(ser, size=1, timeout=5))
 
     # Read Until EOF
-    # print(readEOF(ser))
+    print(readEOF(ser))
 
     # Read Until Exit Code
-    print(readuntilExitCode(ser))
+    # print(readuntilExitCode(ser))
+
+# 01. 전원 (Command: k a)
+# ▶ 세트의 전원 켜짐/ 꺼짐을 제어합니다.
+
+# Transmission(명령값)
+# [k][a][ ][Set ID][ ][Data][Cr]
+# Data	00: 꺼짐
+#       01: 켜짐
+#       ff(FF): 상태값
+# ex) ka 01 01, ka 01 00, ka 01 ff
+
+# Acknowledgement(응답값)
+# [a][ ][Set ID][ ][OK/NG][Data][x]
+# ex) a 01 OK01x, a 01 OK00x, a 01 NG11x
+#     a 01 OK01x (켜져있는경우)
+#     a 01 OK00x (꺼져있는경우)
+# NG인 경우는: 명령어가 잘못된경우, 값이 잘못된경우.
+# 처음 시작상태는 poweroff인 상태로 시작
+# * 디스플레이의 전원이 완전히 켜진 이후에 정상적인 Acknowledgement 신호가 돌아옵니다.
+#
+# ** Transmission/ Acknowledgement 신호 사이에는 일정시간 지연이 발생할 수 있습니다.
