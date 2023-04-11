@@ -37,6 +37,9 @@ while True:
     readed = ser.readuntilExitCode(RETURN_CODE)
     print(readed)
 
+    if readed == b'exit':
+        break
+
     response = 'a 01 OK01 x'
     ser.writePortUnicode(response)
 
