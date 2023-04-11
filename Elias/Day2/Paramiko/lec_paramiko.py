@@ -100,6 +100,86 @@ class MySSH:
             self.ftp_client = self.client.open_sftp()
         self.ftp_client.get(srcFilePath, dstFilePath)
 
+    ###########################################################################################
+    # Put File to Host (SFTP)
+    # srcFilePath: Local(PC, client), desFilePath: Server(host)
+    def putFromHost(self, srcFilePath, dstFilePath):
+        # SFTP 객체를 생성하지 않았으면...(접속한적이 없으면)
+        if self.ftp_client is None:
+            # Get SFTP object from SSHClient
+            self.ftp_client = self.client.open_sftp()
+        self.ftp_client.put(srcFilePath, dstFilePath)
+
+    ###########################################################################################
+    # Rename file on Host (SFTP)
+    # srcFilePath: Server(host), desFilePath: Server(host)
+    def renameHostFile(self, srcFilePath, dstFilePath):
+        # SFTP 객체를 생성하지 않았으면...(접속한적이 없으면)
+        if self.ftp_client is None:
+            # Get SFTP object from SSHClient
+            self.ftp_client = self.client.open_sftp()
+        self.ftp_client.rename(srcFilePath, dstFilePath)
+
+    ###########################################################################################
+    # Delete file on Host (SFTP)
+    # filePath: Server(host)
+    def deleteHostFile(self, filePath):
+        # SFTP 객체를 생성하지 않았으면...(접속한적이 없으면)
+        if self.ftp_client is None:
+            # Get SFTP object from SSHClient
+            self.ftp_client = self.client.open_sftp()
+        self.ftp_client.remove(filePath)
+
+    ###########################################################################################
+    # Get file list on Host (SFTP)
+    # filePath: Server(host)
+    def getFileListFromHost(self, filePath):
+        # SFTP 객체를 생성하지 않았으면...(접속한적이 없으면)
+        if self.ftp_client is None:
+            # Get SFTP object from SSHClient
+            self.ftp_client = self.client.open_sftp()
+        return self.ftp_client.listdir(filePath)
+
+    ######################################################################
+    # Get file list of host
+    # srcFilePath: Server(host)
+    def getFileAttrListFromHost(self, srcFilePath):
+        if self.ftp_client is None:
+            # Get SFTP object from SSHClient
+            self.ftp_client = self.client.open_sftp()
+        return self.ftp_client.listdir_attr(srcFilePath)
+
+    ######################################################################
+    # Delete folder of host
+    # srcFilePath: Server(host)
+    def deleteHostFolder(self, srcFilePath):
+        if self.ftp_client is None:
+            # Get SFTP object from SSHClient
+            self.ftp_client = self.client.open_sftp()
+
+        # # Only current folder only
+        # file_list = self.getFileListFromHost(srcFilePath)
+        # for file in file_list:
+        #     file_path = os.path.join(srcFilePath, file)  # srcFilePath /var/www  filename: log.txt -> /var/www/log.txt
+        #     file_path = file_path.replace('\\', '/')
+        #     self.deleteHostFile(file_path)
+
+        # Delete all subflder recursive
+        file_attr_list = self.ftp_client.listdir_attr(srcFilePath)
+        for file_attr in file_attr_list:
+            path = os.path.join(srcFilePath, file_attr.filename)
+            path = path.replace('\\', '/')
+            # Path is Folder type
+            if stat.S_ISDIR(file_attr.st_mode):
+                self.deleteHostFolder(path)
+            # Path is File type
+            else:
+                self.deleteHostFile(path)
+
+        self.ftp_client.rmdir(srcFilePath)
+
+    ############################################################################################################################################
+
 
 if __name__ == '__main__':
     ssh = MySSH()
@@ -159,7 +239,38 @@ if __name__ == '__main__':
             ##############################################################
             # 서버로 부터 파일 가져오기
             ##############################################################
-            ssh.getFromHost('./process_list.txt', 'process_list.txt')
+            # ssh.getFromHost('./process_list.txt', 'process_list.txt')
+
+            ################################################################################
+            # 서버로 파일 업로드
+            # ssh.putFromHost('lec_paramiko.py', 'lec_paramiko.py')
+
+            ################################################################################
+            # 서버에 있는 파일명 변경
+            # ssh.renameHostFile('./process_list.txt', './process.txt')
+            # ssh.renameHostFile('./temp', './temp2')
+
+            ################################################################################
+            # 서버에 있는 파일삭제
+            # ssh.deleteHostFile('./process_list.txt')
+
+            ################################################################################
+            # 서버의 폴더내 파일목록 가져오기
+            # file_list = ssh.getFileListFromHost('./temp')
+            # print(file_list)
+            # for file in file_list:
+            #     print(file)
+
+            ################################################################################
+            # 서버의 폴더내 파일목록을 속성과 함께 가져오기
+            # file_list = ssh.getFileAttrListFromHost('./temp')
+            # print(file_list)
+            # for file in file_list:
+            #     print(file)
+
+            ################################################################################
+            # 서버의 폴더삭제
+            # ssh.deleteHostFolder('./temp')
 
         else:
             print('Connect is failed!!!')
