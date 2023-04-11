@@ -64,6 +64,10 @@ if __name__ == '__main__':
         if ssh.connet('117.52.91.88', 'elias', '1111', timeout=5, port=22):
             print('SSH is connected')
 
+            ##############################################################
+            # Process List 파일생성(ps -ef > process_list.txt)
+            ##############################################################
+            ssh.exeCommand('ps -ef > process_list.txt', False)
 
         else:
             print('Connect is failed!!!')
