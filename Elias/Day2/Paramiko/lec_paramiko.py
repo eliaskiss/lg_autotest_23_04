@@ -142,7 +142,7 @@ if __name__ == '__main__':
             # sudo 커맨드 실행
             ##############################################################
             # ssh.exeCommand('sudo mkdir /var/temp')
-            ssh.sudoCommand('mkdir /var/temp')
+            # ssh.sudoCommand('mkdir /var/temp')
 
 
         else:
