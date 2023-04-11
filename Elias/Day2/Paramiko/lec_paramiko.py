@@ -18,6 +18,8 @@ class MySSH:
         # 접속한 상태가 아니면
         if self.client is None:
             self.client = SSHClient()
+            # 이코드가 없으면 'Sever ... ' not found in known hosts 에러발생
+            self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             self.client.connect(hostname=host, port=port, username=user_id, password=user_password, timeout=timeout)
 
             if self.isAlive():
@@ -39,7 +41,15 @@ class MySSH:
     # Execute Shell Command
     ##############################################################
     def exeCommand(self, command, isReturn = False):
-        pass
+        if self.isAlive():
+            # _, stdout, _ = self.client.exec_command(command)
+            stdin, stdout, stderr = self.client.exec_command(command)
+
+            if isReturn is True:
+                return stdout.readlines()
+
+        else:
+            print('Client is not connected!!!')
 
     ##############################################################
     # Disconnect
@@ -53,6 +63,8 @@ if __name__ == '__main__':
     try:
         if ssh.connet('117.52.91.88', 'elias', '1111', timeout=5, port=22):
             print('SSH is connected')
+
+
         else:
             print('Connect is failed!!!')
 
