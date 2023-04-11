@@ -155,7 +155,7 @@ class Pillow:
         dir = os.path.dirname(img_file_path)  # images/buz.jpg -> imgaes/
         file_name = os.path.basename(img_file_path)  # buz.jpg
         path = os.path.join(dir, 'merge_' + file_name)
-        merge_image.save(path)  # images/blur_buz.jpg
+        merge_image.save(path)  # images/merge_buz.jpg
         return path
 
 def time_format():
@@ -173,8 +173,8 @@ if __name__ == '__main__':
     if IS_RELEASE is True:
         ic.disable()
 
-    # ########################################################################################################
-    # # 이미지 정보출력
+    ########################################################################################################
+    # 이미지 정보출력
     # img_info = pillow.get_info(img_file_path)
     # ic(img_info)
 
@@ -202,7 +202,7 @@ if __name__ == '__main__':
     # ########################################################################################################
     # # 이미지 회전
     # new_image = pillow.rotate_image(img_file_path, 90, True)
-    # # new_image = pillow.rotate_image(img_file_path, 90, False)
+    # new_image = pillow.rotate_image(img_file_path, 90, False)
     # ic(new_image)
 
     # ########################################################################################################
