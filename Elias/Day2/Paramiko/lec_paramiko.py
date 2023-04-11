@@ -312,12 +312,12 @@ if __name__ == '__main__':
             # ssh.putToHostWithSCP('./process_list.txt', 'process_list.txt')
 
             ######################################################################
-            # Put folder to host with scp
-            # ssh.putFolderToHostSCP('temp', 'temp')
-
-            ######################################################################
             # Get folder from host with scp
             # ssh.getFolderToHostSCP('temp', 'temp')
+
+            ######################################################################
+            # Put folder to host with scp
+            # ssh.putFolderToHostSCP('temp', 'temp')
 
         else:
             print('Connect is failed!!!')
