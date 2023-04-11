@@ -112,7 +112,7 @@ class MySSH:
 
     ###########################################################################################
     # Rename file on Host (SFTP)
-    # srcFilePath: Server(host), desFilePath: Server(host)
+    # srcFilePath: Old Name, desFilePath: New Name
     def renameHostFile(self, srcFilePath, dstFilePath):
         # SFTP 객체를 생성하지 않았으면...(접속한적이 없으면)
         if self.ftp_client is None:
@@ -180,6 +180,37 @@ class MySSH:
 
     ############################################################################################################################################
 
+    ######################################################################
+    # Get file from host with SCP
+    # srcFilePath: Server(host) dstFilePath: Local(PC, client)
+    def getFromHostWithSCP(self, srcFilePath, desFilePath):
+        if self.scp_client == None:
+            self.scp_client = SCPClient(self.client.get_transport())
+        self.scp_client.get(srcFilePath, desFilePath)
+
+    ######################################################################
+    # Put file to host with SCP
+    # srcFilePath: Local(PC, client) dstFilePath: Server(host)
+    def putToHostWithSCP(self, srcFilePath, dstFilePath):
+        if self.scp_client == None:
+            self.scp_client = SCPClient(self.client.get_transport())
+        self.scp_client.put(srcFilePath, dstFilePath)
+
+    ######################################################################
+    # Put folder to host with SCP
+    # srcFilePath: Local(PC, client) dstFilePath: Server(host)
+    def putFolderToHostSCP(self, srcDirPath, dstDirPath):
+        if self.scp_client == None:
+            self.scp_client = SCPClient(self.client.get_transport())
+        self.scp_client.put(srcDirPath, dstDirPath, recursive=True)
+
+    ######################################################################
+    # Get folder to host with SCP
+    # srcFilePath: Local(PC, client) dstFilePath: Server(host)
+    def getFolderToHostSCP(self, srcDirPath, dstDirPath):
+        if self.scp_client == None:
+            self.scp_client = SCPClient(self.client.get_transport())
+        self.scp_client.get(srcDirPath, dstDirPath, recursive=True)
 
 if __name__ == '__main__':
     ssh = MySSH()
@@ -271,6 +302,22 @@ if __name__ == '__main__':
             ################################################################################
             # 서버의 폴더삭제
             # ssh.deleteHostFolder('./temp')
+
+            ######################################################################
+            # Get file from host with scp
+            # ssh.getFromHostWithSCP('./process_list.txt', 'process_list.txt')
+
+            ######################################################################
+            # Put file to host with scp
+            # ssh.putToHostWithSCP('./process_list.txt', 'process_list.txt')
+
+            ######################################################################
+            # Put folder to host with scp
+            # ssh.putFolderToHostSCP('temp', 'temp')
+
+            ######################################################################
+            # Get folder from host with scp
+            # ssh.getFolderToHostSCP('temp', 'temp')
 
         else:
             print('Connect is failed!!!')
