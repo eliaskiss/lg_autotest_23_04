@@ -3,6 +3,7 @@ from paramiko import SSHClient
 from scp import SCPClient
 import os
 import stat
+import time
 
 class MySSH:
     def __init__(self):
@@ -44,6 +45,37 @@ class MySSH:
         if self.isAlive():
             # _, stdout, _ = self.client.exec_command(command)
             stdin, stdout, stderr = self.client.exec_command(command)
+
+            if isReturn is True:
+                return stdout.readlines()
+
+        else:
+            print('Client is not connected!!!')
+
+    ##############################################################
+    # Execute Shell Command
+    ##############################################################
+    def exeCommand(self, command, isReturn=False):
+        if self.isAlive():
+            # _, stdout, _ = self.client.exec_command(command)
+            stdin, stdout, stderr = self.client.exec_command(command)
+
+            if isReturn is True:
+                return stdout.readlines()
+
+        else:
+            print('Client is not connected!!!')
+
+    ##############################################################
+    # Execute Shell Command as root
+    ##############################################################
+    def sudoCommand(self, command, isReturn=False):
+        if self.isAlive():
+            stdin, stdout, stderr = self.client.exec_command('sudo ' + command, get_pty=True)
+
+            stdin.write(self.password + '\n')
+            stdin.flush()
+            time.sleep(0.1)
 
             if isReturn is True:
                 return stdout.readlines()
@@ -103,8 +135,15 @@ if __name__ == '__main__':
             ##############################################################
             # 쉘 스크립트 파일 생성
             ##############################################################
-            ssh.exeCommand('echo "ps -ef > process_list.txt" > make_process_list.sh')
-            ssh.exeCommand('chmod 777 ./make_process_list.sh')
+            # ssh.exeCommand('echo "ps -ef > process_list.txt" > make_process_list.sh')
+            # ssh.exeCommand('chmod 777 ./make_process_list.sh')
+
+            ##############################################################
+            # sudo 커맨드 실행
+            ##############################################################
+            # ssh.exeCommand('sudo mkdir /var/temp')
+            ssh.sudoCommand('mkdir /var/temp')
+
 
         else:
             print('Connect is failed!!!')
