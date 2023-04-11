@@ -15,13 +15,25 @@ class MySSH:
     ##############################################################
     # todo: SSH로 서버에 연결하는 함수작성필요
     def connet(self, host, user_id, user_password, port=22, timeout=None):
-        pass
+        # 접속한 상태가 아니면
+        if self.client is None:
+            self.client = SSHClient()
+            self.client.connect(hostname=host, port=port, username=user_id, password=user_password, timeout=timeout)
+
+            if self.isAlive():
+                self.password = user_password
+                return True
+            else:
+                return False
 
     ##############################################################
     # Check Connection
     ##############################################################
     def isAlive(self):
-        pass
+        if self.client is None:
+            return None
+        else:
+            return self.client.get_transport().is_active()
 
     ##############################################################
     # Execute Shell Command
