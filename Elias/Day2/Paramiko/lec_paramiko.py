@@ -67,7 +67,7 @@ if __name__ == '__main__':
             ##############################################################
             # Process List 파일생성(ps -ef > process_list.txt)
             ##############################################################
-            ssh.exeCommand('ps -ef > process_list.txt', False)
+            # ssh.exeCommand('ps -ef > process_list.txt', False)
 
             ##############################################################
             # 파일목록 가져오기 (ls -al)
@@ -97,9 +97,14 @@ if __name__ == '__main__':
             https://opentutorials.org/module/2538/15818
             '''
 
-            for file in ssh.exeCommand('cd temp && ls -al&& pwd', True):
-                print(file, end='')
+            # for file in ssh.exeCommand('cd temp && ls -al&& pwd', True):
+            #     print(file, end='')
 
+            ##############################################################
+            # 쉘 스크립트 파일 생성
+            ##############################################################
+            ssh.exeCommand('echo "ps -ef > process_list.txt" > make_process_list.sh')
+            ssh.exeCommand('chmod 777 ./make_process_list.sh')
 
         else:
             print('Connect is failed!!!')
