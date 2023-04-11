@@ -47,6 +47,17 @@ class MySSH:
     def disconnect(self):
         pass
 
+if __name__ == '__main__':
+    ssh = MySSH()
+
+    try:
+        if ssh.connet('117.52.91.88', 'elias', '1111', timeout=5, port=22):
+            print('SSH is connected')
+        else:
+            print('Connect is failed!!!')
+
+    except Exception as e:
+        print(e)
 
 
 
