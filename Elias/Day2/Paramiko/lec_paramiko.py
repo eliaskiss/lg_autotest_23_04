@@ -89,6 +89,18 @@ class MySSH:
     def disconnect(self):
         pass
 
+    ##############################################################
+    # Get File from Host (SFTP)
+    # scrFilePath: Server(host), desFilePath: Local(PC, Client)
+    ##############################################################
+    def getFromHost(self, srcFilePath, dstFilePath):
+        # SFTP 객체를 생성하지 않았으면...(접속한적이 없으면)
+        if self.ftp_client is None:
+            # Get SFTP object from SSHClient
+            self.ftp_client = self.client.open_sftp()
+        self.ftp_client.get(srcFilePath, dstFilePath)
+
+
 if __name__ == '__main__':
     ssh = MySSH()
 
@@ -144,6 +156,10 @@ if __name__ == '__main__':
             # ssh.exeCommand('sudo mkdir /var/temp')
             # ssh.sudoCommand('mkdir /var/temp')
 
+            ##############################################################
+            # 서버로 부터 파일 가져오기
+            ##############################################################
+            ssh.getFromHost('./process_list.txt', 'process_list.txt')
 
         else:
             print('Connect is failed!!!')
