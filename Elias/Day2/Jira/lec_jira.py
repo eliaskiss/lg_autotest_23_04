@@ -15,7 +15,7 @@ class logger:
     def startLog(self, fileName):
         now = datetime.now()
         currentDir = os.path.dirname(os.path.abspath(__file__))
-        fileName = currentDir + "/logs/" + now.strftime(fileName + '_%Y_%m_%d') + '.txt'
+        fileName = currentDir + "/logs/" + now.strftime(fileName + '_%Y_%m_%d') + '.txt' # ./logs/log_2023_04_11.txt
         self.logfile = open(fileName, 'w')
 
     def endLog(self):
@@ -23,7 +23,7 @@ class logger:
 
     def log(self, message):
         now = datetime.now()
-        msg = now.strftime('%H:%M:%S ') + message
+        msg = now.strftime('%H:%M:%S ') + message # 10:20:30 OpenFile
         # print msg
         self.logfile.write(msg + "\n")
 
@@ -89,6 +89,7 @@ class JiraIssueAutoAssigner:
                 createdate = fields.created # 2022-04-13T14:10:20
                 createdate = createdate.split('T')[0]
                 createdate = datetime.strptime(createdate, '%Y-%m-%d')
+                #today.strptime("%Y/%m/%d %H:%M:%S") # 2023/04/11 10:30:30
 
                 duedate = fields.duedate
                 duedate = datetime.strptime(duedate, '%Y-%m-%d')
@@ -135,7 +136,7 @@ class JiraIssueAutoAssigner:
                 assignee = self.getAssignee(name, function)
 
                 # issue.update(assignee={'name': assignee})
-                if assignee != None:
+                if assignee is not None:
                     if assignee != 'Not yet':
                         assignee = assignee.strip()
                         jira.assign_issue(issue, assignee)
