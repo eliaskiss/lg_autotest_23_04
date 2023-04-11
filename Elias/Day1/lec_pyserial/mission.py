@@ -99,8 +99,8 @@ while True:
 
     # 로그파일 저장
     jsonData = {'command': command, 'setId':setId, 'value':value, 'response':response}
-    jsonString = jsonData.dumps(jsonData) # dictionary object --> string ('{"command":ka, "setId":01, ...}')
-    # jsonData = jsonData.loads(jsonString) # string --> dictionary object
+    jsonString = json.dumps(jsonData) # dictionary object --> string ('{"command":ka, "setId":01, ...}')
+    # jsonData = json.loads(jsonString) # string --> dictionary object
     print('JsonString:', jsonString)
 
     # 현재시간
