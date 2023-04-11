@@ -83,6 +83,9 @@ class MySerial:
             if data == code:
                 return readed[:-1]
 
+    def close(self):
+        self.ser.close()
+
 if __name__ == '__main__':
     # 시리얼 포트 객체생성
     ser = MySerial('COM2')
