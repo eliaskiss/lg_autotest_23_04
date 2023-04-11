@@ -69,6 +69,38 @@ if __name__ == '__main__':
             ##############################################################
             ssh.exeCommand('ps -ef > process_list.txt', False)
 
+            ##############################################################
+            # 파일목록 가져오기 (ls -al)
+            ##############################################################
+            # file_list = ssh.exeCommand('ls -al', True)
+            # for file in file_list:
+            #     print(file, end='')
+
+            ##############################################################
+            # temp 폴더생성 (putty)
+            # > mkdir temp
+            # process_list.txt 파일생성 (putty)
+            # > cd temp
+            # > ps -ef > process_list.txt
+            # Python Code
+            # cd temp --> ls -al --> 파일목록 가져오기
+            ##############################################################
+
+            # ssh.exeCommand('cd temp')
+            # for file in ssh.exeCommand('ls -al', True):
+            #     print(file, end='')
+
+            '''
+            ; - 앞의 명령어가 실패해도 다음 명령어가 실행
+            && - 앞의 명령어가 성공했을 때 다음 명령어가 실행
+            & - 앞의 명령어를 백그라운드로 돌리고 동시에 뒤의 명령어를 실행
+            https://opentutorials.org/module/2538/15818
+            '''
+
+            for file in ssh.exeCommand('cd temp && ls -al&& pwd', True):
+                print(file, end='')
+
+
         else:
             print('Connect is failed!!!')
 
