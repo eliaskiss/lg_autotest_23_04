@@ -132,6 +132,8 @@ if __name__ == '__main__':
 
     # DB에서 특정 데이터 하나만 가져오기
     sql = 'select * from elias where name="Elias Kim" and age=20;'
+    # sql = 'select count(*) as total_count from elias;'
+    # sql = 'select count(*) from elias;'
     data = db.execute_and_return_one(sql)
     ic(data)
 
