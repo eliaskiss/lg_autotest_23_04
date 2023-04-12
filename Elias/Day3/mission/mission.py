@@ -29,22 +29,53 @@ from openpyxl.styles.borders import Border, Side
 DB_URL = '117.52.91.88'
 DB_USER = 'dbAdmin'
 DB_PW = '1111'
-DB_NAME = 'elias' # 반드시 자신의 Table 사용
+DB_NAME = 'elias' # 반드시 자신의 DB 사용
 
 def put_data_to_db(excel_file_name):
+    # Load wb from excel file
+    # wb = ...
+
+    # Select work sheet
+    # ws = ...
+
+    # DB 객체 생성
+    # db = ...
+
+    # DB 연결
+    # db...
+
+    # Read data from work sheet
+    # for row in ws.iter_rows(min_row=?)
+    # ...
+    # db.... # insert to db
+
     pass
 
 # Task2
-# DB의 public_bicycle의 테이블에서 특정 데이터를 뽑아서, 엑셀로 저장하기
-# 2020이후에 서초구에 생성된 자전거 대여서 목록데이터
-# sql = 'SELECT * FROM elias WHERE DATE(install_date) >= "2020-01-01" AND region = "서초구";'
-# elias 대신에 자신의 테이블사용
+# DB의 bicycle의 테이블에서 특정 데이터를 뽑아서, 엑셀로 저장하기
+# 2020이후에 서초구에 생성된 자전거 대여소 목록데이터
+# sql = 'SELECT * FROM bicycle WHERE DATE(install_date) >= "2020-01-01" AND region = "서초구";'
 
 # sql = 'SELECT * FROM elias WHERE DATE(install_date) >= %s AND region = %s;'
 # from_date = "2020-01-01"
 # region = "서초구"
 # values = (from_date, region)
-# execut(sql, values)
+# execute(sql, values)
 
 def get_data_from_db(from_date, region, output_file_name):
+    # Create Workbook
+
+    # Select Worksheet
+
+    # Rename Worksheet
+
+    # Header (Merge)
+
+    # Get data from DB with sql = 'SELECT * FROM bicycle WHERE DATE(install_date) >= "2020-01-01" AND region = "서초구";'
+
+    # for data in data_list:
+    #   Add to worksheet
+
+    # Add Styling
     pass
+
