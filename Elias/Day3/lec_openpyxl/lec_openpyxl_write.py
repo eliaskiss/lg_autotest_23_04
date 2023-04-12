@@ -12,6 +12,7 @@ file_name = './new_excel.xlsx'
 # Get Active Worksheet
 ws = wb.active # 'sheet1'
 
+#######################################################################################################################
 # Set Sheet Name
 ws.title = 'Basic'
 
@@ -52,14 +53,44 @@ ws['G1'] = 'World'
 ws.merge_cells(start_row=1, start_column=6, end_row=1, end_column=7)
 ws.unmerge_cells(start_row=1, start_column=6, end_row=1, end_column=7)
 
+# Insert Image
+img = Image('buz.jpg')
+ws.add_image(img, 'B10')
 
+# Create new sheet
+wb.create_sheet('Insert Delete Move')
 
+#######################################################################################################################
+# Select new sheet
+ws = wb['Insert Delete Move']
 
+# Creat Row Data
+row  = [x for x in range(20)] # [0,1,2,3,...,19]
 
+for _ in range(20):
+    ws.append(row)
 
+# # Insert Empty Row
+# ws.insert_rows(2)
+#
+# # Insert Empty Column
+# ws.insert_cols(2)
+#
+# # Delete Rows
+# ws.delete_rows(5, 7) # From 5, Step 7
+#
+# # Delete Columns
+# ws.delete_cols(5, 7) # From 5, Step 7
 
+# Move Row
+ws.move_range('A1:U1', rows=15, cols=2) # Step 15 rows, Step 2 cols
 
+#######################################################################################################################
+# Create & Seelct chart sheet
+wb.create_sheet('Chart')
+ws = wb['Chart']
 
+for i in range()
 
 
 
