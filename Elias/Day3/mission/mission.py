@@ -1,9 +1,9 @@
-from lec_pymysql import Database
 from openpyxl import load_workbook
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, PatternFill
 from openpyxl.styles.fonts import Font
 from openpyxl.styles.borders import Border, Side
+from lec_pymysql import Database
 
 # Create Table SQL
 # table_name 지정필요!!!!
@@ -31,22 +31,46 @@ DB_USER = 'dbAdmin'
 DB_PW = '1111'
 DB_NAME = 'elias' # 반드시 자신의 DB 사용
 
+db = Database(DB_URL, DB_USER, DB_PW, DB_NAME)
+db.connect_db()
+db.disconnect_db()
+
 def put_data_to_db(excel_file_name):
     # Load wb from excel file
-    # wb = ...
+    wb = load_workbook(excel_file_name, data_only=True, read_only=True)
 
     # Select work sheet
-    # ws = ...
+    ws = wb.active
+    # ws = wb['대여소현황']
 
     # DB 객체 생성
-    # db = ...
+    db = Database(DB_URL, DB_USER, DB_PW, DB_NAME)
 
     # DB 연결
-    # db...
+    db.connect_db()
 
     # Read data from work sheet
-    # for row in ws.iter_rows(min_row=?)
-    # ...
+    for row in ws.iter_rows(min_row=6):
+        station_number =  row[0].value
+        station_name = row[1].value
+        region = row[2].value
+        address = row[3].value
+        latitude = row[4].value
+        longitude = row[5].value
+        install_date = row[6].value
+        lcd_count = row[7].value
+        qr_count = row[8].value
+        proc_type = row[9].value
+
+        sql = 'insert into elias (station_number, station_name, region, address, latitude, longitude,' \
+              'install_date, lcd_count, qr_count, proc_type) values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);'
+        values = (station_number, station_name, region, address, latitude, longitude,
+                  install_date, lcd_count, qr_count, proc_type)
+
+        db.execute_only(sql, values)
+    db.commit_only()
+    db.disconnect_db()
+
     # db.... # insert to db
 
     pass
