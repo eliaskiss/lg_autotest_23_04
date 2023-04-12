@@ -18,3 +18,9 @@ class Database:
         if self.conn is None:
             self.conn = pymysql.connect(host=self.host, user=self.user, passwd=self.passwd,
                                         db=self.db, charset='utf8')
+            # id, reg_datetime, name, age --> row[0], row[1], row[2], row[3] : List
+            # self.cursor = self.conn.cursor()
+
+            # id, reg_datetime, name, age --> row['id'], row['reg_datetime'], row['name'], row['age'] : Dictionary
+            self.cursor = self.conn.cursor(pymysql.cursors.DictCursor)
+
