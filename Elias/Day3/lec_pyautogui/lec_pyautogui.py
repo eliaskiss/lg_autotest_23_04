@@ -201,6 +201,7 @@ if __name__ == "__main__":
 
     # Set Fail-Safe Mode : 범위벗어났을때 예외발생여부
     # ic('Default Fail-Safe Mode:', ag.getFailSafeMode())
+    # ag.mouseMove(2000, 2000)
     # ag.setFailSafeMode(False)
     # ic('New Fail-Safe Mode:', ag.getFailSafeMode())
 
@@ -209,6 +210,7 @@ if __name__ == "__main__":
     # ag.mouseMove(500, 500, 3) # (500, 500)으로 3초 동안 이동
     # ag.mouseMove(100, 100) # (100, 100)으로 이동
     # ag.mouseMove(100, 100, 3, relative=True) # 현재 마우스 커서 위치 기준으로 (100, 100) 3초 동안 이동
+    # ag.mouseMove(-100, -100, 3, relative=True) # 현재 마우스 커서 위치 기준으로 반대방향(100, 100) 3초 동안 이동
 
     # Mouse Drag
     # ic(ag.getMousePosition())
