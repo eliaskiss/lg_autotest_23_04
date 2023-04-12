@@ -165,13 +165,36 @@ def get_data_from_db(from_date, region, output_file_name):
         # Way II
         ws.append([_data for _data in list(data.values())[2:]])
 
-    wb.save(output_file_name)
-
     # Add Styling
     thin_border = Border(left=Side(style='thin'),
-                         left=Side(style='thin'),
-                         left=Side(style='thin'),
-                         left=Side(style='thin'))
+                         right=Side(style='thin'),
+                         top=Side(style='thin'),
+                         bottom=Side(style='thin'))
+
+    bold_white_font = Font(bold=True,
+                           size=12,
+                           italic=None,
+                           underline=None,
+                           strike=None,
+                           color='FFFFFF')
+
+    background_fill = PatternFill(start_color='525E75',
+                                  end_color='525E75',
+                                  fill_type='solid')
+
+    # Header Style적용 : 백그라운드 색 + 화이트 볼드 폰트
+    for row in ws.iter_rows(max_row=5):
+        for cell in row:
+            cell.fill = background_fill
+            cell.font = bold_white_font
+
+    # 테두리 적용 : this
+    for col in ws.columns:
+        for cell in col:
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.border = thin_border
+
+    wb.save(output_file_name)
 
 if __name__ == '__main__':
     # put_data_to_db('public_bicycle.xlsx')
