@@ -168,24 +168,15 @@ if __name__ == '__main__':
     #
     #     print(f'Name: {name}, Age: {age}, Address: {address}')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    # # 여러 데이터 삽입
+    # people_list = [{'name':'Honey', 'age':22},
+    #                {'name':'Evo', 'age':20}]
+    #
+    # for people in people_list:
+    #     sql = 'insert into elias (name, age) values(%s, %s);'
+    #     values = (people['name'], people['age'])
+    #     db.execute_only(sql, values)
+    # db.commit_only()
 
     # DB 연결해제
     db.disconnect_db()
