@@ -22,3 +22,38 @@ ws = wb['항공요금']
 # ws = wb[ws_list[0]]  # 첫번째 워크시트
 # ws = wb[ws_list[-1]] # 마지막번째 워크시트
 
+# Get Cell Value
+cell_A1 = ws['A1']
+ic(cell_A1)
+ic(cell_A1.value)
+
+# Get Formular Cell Value
+cell_D2 = ws['D2']
+ic(cell_D2.value) # data_only의 값에 따라 다른 Cell값을 가져옴, data_only : True --> 8.43, data_only : False --> =A2+B2
+
+# Get Datetime Cell Value
+cell_F2 = ws['F2']
+ic(cell_F2.value)
+cell_F2_value = cell_F2.value.strftime('%Y-%m-%d %H:%M:%S')
+ic(cell_F2_value)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
