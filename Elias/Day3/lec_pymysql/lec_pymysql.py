@@ -3,6 +3,9 @@ from icecream import ic
 
 ic.configureOutput(includeContext=True)
 
+# SQL Tutorial
+# https://www.w3schools.com/sql/default.asp
+
 class Database:
     def __init__(self, host, user, passwd, db):
         self.host = host        # DB IP
@@ -24,3 +27,30 @@ class Database:
             # id, reg_datetime, name, age --> row['id'], row['reg_datetime'], row['name'], row['age'] : Dictionary
             self.cursor = self.conn.cursor(pymysql.cursors.DictCursor)
 
+
+    def execute_only(self, sql, values=None):
+        try:
+            # 'select * from lg_autotest;'
+            # 'select * from lg_autotest where name = "Elias";'
+            if values is None:
+                self.cursor.execute(sql)
+
+            # age = 20
+            # name = 'elias'
+            # sql = 'select * from elias where age = 20;'
+
+            # sql = f'select * from elias where age = {age};'
+            # sql = 'select * from elias where age = ' + age + ';'
+
+            # sql = 'select * from elias where name = ' + name + ' and  age = ' + age + ';' # ERROR!!!
+            # sql = 'select * from elias where name = "' + name + '" and  age = ' + age + ';' # OK
+            # sql = f'select * from elias where name = {name} and age = {age};' # ERROR!!!
+            # sql = f'select * from elias where name = "{name}" and age = {age};' # OK
+
+            # sql = 'select * from elias where name = %s and age = %s;' # 권장드림
+            # values = [elias, age]
+            else:
+                self.cursor.execute(sql, values)
+
+        except Exception as e:
+            print(e)
