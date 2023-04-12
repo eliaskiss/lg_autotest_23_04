@@ -130,22 +130,26 @@ if __name__ == '__main__':
     # for data in data_list:
     #     ic(data)
 
-    # DB에서 특정 데이터 하나만 가져오기
-    sql = 'select * from elias where name="Elias Kim" and age=20;'
-    # sql = 'select count(*) as total_count from elias;'
-    # sql = 'select count(*) from elias;'
-    data = db.execute_and_return_one(sql)
-    ic(data)
+    # # DB에서 특정 데이터 하나만 가져오기
+    # sql = 'select * from elias where name="Elias Kim" and age=20;'
+    # # sql = 'select count(*) as total_count from elias;'
+    # # sql = 'select count(*) from elias;'
+    # data = db.execute_and_return_one(sql)
+    # ic(data)
 
-    # DB값 업데이트
+    # # DB값 업데이트
+    # id = 1
+    # new_name = "Hong Gildong"
+    # new_age = 30
+    #
+    # sql = 'update elias set name=%s, age=%s where id=%s;'
+    # values = (new_name, new_age, id)
+    # db.execute_and_commit(sql, values)
+
+    # DB값 삭제
     id = 1
-    new_name = "Hong Gildong"
-    new_age = 30
-
-    sql = 'update elias set name=%s, age=%s where id=%s;'
-    values = (new_name, new_age, id)
-    db.execute_and_commit(sql, values)
-
+    sql = f'delete from elias where id = {id};'
+    db.execute_and_commit(sql)
 
 
 
