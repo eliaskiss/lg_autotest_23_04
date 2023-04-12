@@ -134,21 +134,18 @@ double = Side(border_style='double', color='000000')
 ws['B6'] = 'Double'
 ws['B6'].border = Border(top=double, left=double, right=double, bottom=double)
 
+# Cell Fill
+ws['A7'] = 'Solid'
+ws['A7'].fill = PatternFill('solid', fgColor='DDDDDD')
 
+ws['A8'] = 'Gradient'
+ws['A8'].fill = GradientFill(stop=('000000', 'FFFFFF'))
 
+# Cell Alignment
+ws['A9'] = 'c'
+ws['A9'].alignment = Alignment(horizontal='center', vertical='center')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Save Sheet Index
+wb.active = 3
 
 wb.save(filename=file_name)
