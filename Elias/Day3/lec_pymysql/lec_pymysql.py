@@ -146,10 +146,39 @@ if __name__ == '__main__':
     # values = (new_name, new_age, id)
     # db.execute_and_commit(sql, values)
 
-    # DB값 삭제
-    id = 1
-    sql = f'delete from elias where id = {id};'
-    db.execute_and_commit(sql)
+    # # DB값 삭제
+    # id = 1
+    # sql = f'delete from elias where id = {id};'
+    # db.execute_and_commit(sql)
+
+    # # DB 데이터 접근하기
+    # sql = 'select * from elias;'
+    # data_list = db.execute_and_return(sql)
+    #
+    # for data in data_list:
+    #     name = data['name']
+    #     age = data['age']
+    #     # address = data['address']
+    #
+    #     # Key 존재여부 확인
+    #     if 'address' in data:
+    #         address = data['address']
+    #     else:
+    #         address = 'unknown'
+    #
+    #     print(f'Name: {name}, Age: {age}, Address: {address}')
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
