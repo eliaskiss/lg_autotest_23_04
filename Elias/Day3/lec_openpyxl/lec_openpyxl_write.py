@@ -86,11 +86,50 @@ for _ in range(20):
 ws.move_range('A1:U1', rows=15, cols=2) # Step 15 rows, Step 2 cols
 
 #######################################################################################################################
+# Doc Site: https://openpyxl.readthedocs.io/en/stable/charts/introduction.html
+
 # Create & Seelct chart sheet
 wb.create_sheet('Chart')
 ws = wb['Chart']
 
-for i in range()
+for i in range(10):
+    ws.append([i])
+
+values = Reference(ws, min_col=1, min_row=1, max_col=1, max_row=10)
+chart = BarChart()
+chart.add_data(values)
+ws.add_chart(chart, 'C1')
+
+#######################################################################################################################
+
+from openpyxl.styles import Font, Color, PatternFill, GradientFill, Alignment, Side, Border
+
+# Create New Sheet
+wb.create_sheet('Style')
+ws = wb['Style']
+
+# Set Color
+red_font = Font(color='FF0000')
+ws['A1'] = 'Red'
+ws['A1'].font = red_font
+
+# Set Combination
+combi_font = Font(color='395B64', size=20, bold=True, italic=True,
+                  underline='singleAccounting', # underline: single, double, singleAccounting, doubleAccounting
+                  strike=True)
+ws['A2'] = 'Combination'
+ws['A2'].font = combi_font
+
+# Font Name
+arial_font = Font(name='arial', size=14)
+ws['A3'] = 'Arial'
+ws['A3'].font = arial_font
+
+
+
+
+
+
 
 
 
