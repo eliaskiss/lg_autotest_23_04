@@ -27,7 +27,7 @@ class Database:
             # id, reg_datetime, name, age --> row['id'], row['reg_datetime'], row['name'], row['age'] : Dictionary
             self.cursor = self.conn.cursor(pymysql.cursors.DictCursor)
 
-
+    # Execute Only
     def execute_only(self, sql, values=None):
         try:
             # 'select * from lg_autotest;'
@@ -36,8 +36,8 @@ class Database:
                 self.cursor.execute(sql)
 
             # age = 20
-            # name = 'elias'
-            # sql = 'select * from elias where age = 20;'
+            # name = 'Hong'
+            # sql = 'select * from elias where name = "Hong" age = 20;'
 
             # sql = f'select * from elias where age = {age};'
             # sql = 'select * from elias where age = ' + age + ';'
@@ -48,9 +48,11 @@ class Database:
             # sql = f'select * from elias where name = "{name}" and age = {age};' # OK
 
             # sql = 'select * from elias where name = %s and age = %s;' # 권장드림
-            # values = [elias, age]
+            # values = [elias, age] or (elias, age)
             else:
                 self.cursor.execute(sql, values)
 
         except Exception as e:
             print(e)
+
+
