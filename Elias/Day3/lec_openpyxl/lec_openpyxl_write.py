@@ -125,6 +125,20 @@ arial_font = Font(name='arial', size=14)
 ws['A3'] = 'Arial'
 ws['A3'].font = arial_font
 
+# Cell Border
+thin = Side(border_style='thin', color='000000')
+ws['B4'] = 'Thin'
+ws['B4'].border = Border(top=thin, left=thin, right=thin, bottom=thin)
+
+double = Side(border_style='double', color='000000')
+ws['B6'] = 'Double'
+ws['B6'].border = Border(top=double, left=double, right=double, bottom=double)
+
+
+
+
+
+
 
 
 
