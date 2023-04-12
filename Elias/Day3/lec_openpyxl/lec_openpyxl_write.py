@@ -33,6 +33,38 @@ ws.append(row)
 # Use Function
 ws['D1'] = '=SUM(B1+C1)'
 
+# Insert Datetime
+ws['A4'] = datetime.now()
+ws['B4'] = datetime.now() + timedelta(days=1) # 내일
+# ws['B4'] = datetime.now() - timedelta(days=1) # 어제
+# ws['B4'] = datetime.now() + timedelta(hours=1) # 한시간 후
+ws['C4'] = '2023-04-12'
+
+# Merge Target Cell
+ws['F1'] = 'Hello'
+ws['G1'] = 'World'
+
+# # Merge/Unmerge
+# ws.merge_cells(range_string='F1:G1')
+# ws.unmerge_cells('F1:G1')
+
+# Merge/Unmerge II
+ws.merge_cells(start_row=1, start_column=6, end_row=1, end_column=7)
+ws.unmerge_cells(start_row=1, start_column=6, end_row=1, end_column=7)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 wb.save(filename=file_name)
