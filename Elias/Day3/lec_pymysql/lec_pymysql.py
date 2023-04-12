@@ -55,4 +55,72 @@ class Database:
         except Exception as e:
             print(e)
 
+    # Excute and Commit
+    def execute_and_commit(self, sql, values=None):
+        try:
+            self.execute_only(sql, values)
+            self.conn.commit()
+        except Exception as e:
+            print(e)
+
+    # Commit Only
+    def commit_only(self):
+        try:
+            self.conn.commit()
+        except Exception as e:
+            print(e)
+
+
+    # Execute and Return All
+    def execute_and_return(self, sql, values=None):
+        try:
+            self.execute_only(sql, values)
+            data_list = self.cursor.fetchall()
+
+            # 데이터가 없으면, None을 return하지않고, 빈 리스트를 return []
+            if data_list is None:
+                data_list = []
+
+            return data_list
+        except Exception as e:
+            print(e)
+
+    # Execute and Return One
+    def execute_and_return_one(self, sql, values):
+        try:
+            self.execute_only(sql, values)
+            data = self.cursor.fetchone()
+            return data
+        except Exception as e:
+            print(e)
+
+    # Close Connection
+    def disconnect_db(self):
+        if self.conn is not None:
+            self.conn.close()
+            self.conn = None
+            self.cursor = None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
