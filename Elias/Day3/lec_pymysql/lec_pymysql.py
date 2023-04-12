@@ -137,6 +137,15 @@ if __name__ == '__main__':
     data = db.execute_and_return_one(sql)
     ic(data)
 
+    # DB값 업데이트
+    id = 1
+    new_name = "Hong Gildong"
+    new_age = 30
+
+    sql = 'update elias set name=%s, age=%s where id=%s;'
+    values = (new_name, new_age, id)
+    db.execute_and_commit(sql, values)
+
 
 
 
