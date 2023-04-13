@@ -376,6 +376,25 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>cb_serial_port</tabstop>
+  <tabstop>btn_open_serial</tabstop>
+  <tabstop>btn_close_serial</tabstop>
+  <tabstop>rb_on</tabstop>
+  <tabstop>rb_off</tabstop>
+  <tabstop>btn_set_power</tabstop>
+  <tabstop>btn_get_power</tabstop>
+  <tabstop>btn_clear</tabstop>
+  <tabstop>tb_log_power</tabstop>
+  <tabstop>le_excel_path</tabstop>
+  <tabstop>btn_find_excel</tabstop>
+  <tabstop>btn_update_db</tabstop>
+  <tabstop>le_export_excel</tabstop>
+  <tabstop>le_date</tabstop>
+  <tabstop>le_region</tabstop>
+  <tabstop>btn_export_to_excel</tabstop>
+  <tabstop>btn_exit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
