@@ -1,0 +1,1 @@
+from .lec_pyserial_class import MySerial
