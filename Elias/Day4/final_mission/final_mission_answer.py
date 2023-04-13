@@ -131,8 +131,8 @@ class MainDialog(QDialog):
         if from_date == '' or region == '':
             QMessageBox.warning(self, '경고', '설치날짜 또는 지역이 입력되지 않았습니다!!!', QMessageBox.Yes)
         else:
-            self.get_data_from_db(from_date, region, file_name)
             self.main_ui.btn_export_to_excel.setEnabled(False)
+            self.get_data_from_db(from_date, region, file_name)
             QMessageBox.information(self, '알림', '엑셀내보내기가 완료되었습니다.', QMessageBox.Yes)
             self.main_ui.btn_export_to_excel.setEnabled(True)
 
