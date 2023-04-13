@@ -153,6 +153,7 @@ class MainDialog(QDialog):
         row = int(self.main_ui.le_row.text())
         column = int(self.main_ui.le_column.text())
         self.add_log('TableWidget Item[%s,%s]: %s' % (row, column, self.main_ui.tableWidget.item(row, column).text()))
+
     ###########################################################################################
     # ListWidget
     def add_lw(self):
@@ -172,6 +173,7 @@ class MainDialog(QDialog):
         for i in range(self.main_ui.listWidget.count()):
             items.append(self.main_ui.listWidget.item(i).text())
         self.add_log(f'ListWidget: {items}')
+
     ###########################################################################################
     # LineEdit
     def get_le(self):
@@ -180,6 +182,7 @@ class MainDialog(QDialog):
 
     def set_le(self):
         self.main_ui.lineEdit.setText('world')
+
     ###########################################################################################
     # SpinBox
     def get_sp(self):
@@ -188,6 +191,7 @@ class MainDialog(QDialog):
 
     def set_sp(self):
         self.main_ui.spinBox.setValue(10)
+
     ###########################################################################################
     # RadioButton
     def get_rb(self):
@@ -202,6 +206,7 @@ class MainDialog(QDialog):
         self.main_ui.radioButton_a.setChecked(True)
         self.main_ui.radioButton_b.setChecked(False)
         self.main_ui.checkBox.setChecked(True)
+
     ###########################################################################################
     # For Thread
     def start_thread(self):
