@@ -62,10 +62,10 @@ file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
 # COM_PORT = 'COM3'
-DB_URL = '139.150.72.146'
-DB_USER = 'dbUser'
-DB_PW = 'dbUser'
-DB_NAME = 'bicycle_data'
+DB_URL = '117.52.91.88'
+DB_USER = 'dbAdmin'
+DB_PW = '1111'
+DB_NAME = 'elias' # !! 자신의 DB이름
 
 class MainDialog(QDialog):
     def __init__(self):
@@ -216,7 +216,7 @@ class MainDialog(QDialog):
         db = Database(DB_URL, DB_USER, DB_PW, DB_NAME)
         db.connect_db()
 
-        sql = 'SELECT * FROM elias WHERE DATE(install_date) >= %s AND region = %s;'
+        sql = 'SELECT * FROM bicycle WHERE DATE(install_date) >= %s AND region = %s;'
         values = (from_date, region)
         data_list = db.execute_and_return(sql, values)
 
