@@ -21,7 +21,7 @@ driver.get('https://www.naver.com')
 
 # 검색입력창 찾기
 input_search = driver.find_element(By.ID, 'query')
-# input_search = driver.find_element_by_name('query')
+# input_search = driver.find_element_by_name('query') # Old Version
 # input_search = driver.find_element(By.NAME, 'query')
 # input_search = driver.find_element(By.CLASS_NAME, 'input_text')
 # input_search = driver.find_element(By.CSS_SELECTOR, '#query')       # '#': Element ID
