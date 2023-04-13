@@ -116,6 +116,22 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        Dialog.setTabOrder(self.cb_serial_port, self.btn_open_serial)
+        Dialog.setTabOrder(self.btn_open_serial, self.btn_close_serial)
+        Dialog.setTabOrder(self.btn_close_serial, self.rb_on)
+        Dialog.setTabOrder(self.rb_on, self.rb_off)
+        Dialog.setTabOrder(self.rb_off, self.btn_set_power)
+        Dialog.setTabOrder(self.btn_set_power, self.btn_get_power)
+        Dialog.setTabOrder(self.btn_get_power, self.btn_clear)
+        Dialog.setTabOrder(self.btn_clear, self.tb_log_power)
+        Dialog.setTabOrder(self.tb_log_power, self.le_excel_path)
+        Dialog.setTabOrder(self.le_excel_path, self.btn_find_excel)
+        Dialog.setTabOrder(self.btn_find_excel, self.btn_update_db)
+        Dialog.setTabOrder(self.btn_update_db, self.le_export_excel)
+        Dialog.setTabOrder(self.le_export_excel, self.le_date)
+        Dialog.setTabOrder(self.le_date, self.le_region)
+        Dialog.setTabOrder(self.le_region, self.btn_export_to_excel)
+        Dialog.setTabOrder(self.btn_export_to_excel, self.btn_exit)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
