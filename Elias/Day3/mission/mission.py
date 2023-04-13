@@ -1,8 +1,22 @@
+import sys
+
 from openpyxl import load_workbook
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, PatternFill
 from openpyxl.styles.fonts import Font
 from openpyxl.styles.borders import Border, Side
+
+# 맨마지막에 Path 추가
+# sys.path.append('D:\source\lg_autotest_23_04\Elias\Day3\lec_pymysql')
+sys.path.append('..\lec_pymysql')
+
+# 우선순위 0으로 Path 추가
+# sys.path.insert(0, 'D:\source\lg_autotest_23_04\Elias\Day3\lec_pymysql')
+# sys.path.insert(0, '..\lec_pymysql')
+
+# 상위폴더 Path 추가
+# sys.path.append('..')
+
 from lec_pymysql import Database
 
 # Create Table SQL
@@ -196,6 +210,13 @@ def get_data_from_db(from_date, region, output_file_name):
 
     wb.save(output_file_name)
 
+
 if __name__ == '__main__':
     # put_data_to_db('public_bicycle.xlsx')
-    get_data_from_db('2020-01-01', '서초구', 'new_excel.xlsx')
+    # get_data_from_db('2020-01-01', '서초구', 'new_excel.xlsx')
+    print(sys.path)
+
+    db = Database(DB_URL, DB_USER, DB_PW, DB_NAME)
+    db.connect_db()
+    db.disconnect_db()
+
